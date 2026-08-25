@@ -2723,9 +2723,8 @@ export const PRODUCTS: Product[] = [
     "category": "tees",
     "collection": "after-hours-essentials",
     "images": [
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1687848606_2245232.jpg",
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1687848606_4540455.jpg",
-      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=85&w=1200&auto=format&fit=crop"
     ],
     "sizes": [
       "S",
@@ -2771,9 +2770,8 @@ export const PRODUCTS: Product[] = [
     "category": "tees",
     "collection": "new-after-dark",
     "images": [
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1701258671_4874479.jpg",
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1701258671_8109605.jpg",
-      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?q=85&w=1200&auto=format&fit=crop"
     ],
     "sizes": [
       "S",
@@ -2819,9 +2817,8 @@ export const PRODUCTS: Product[] = [
     "category": "tees",
     "collection": "night-shift",
     "images": [
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1698305096_6486027.jpg",
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1698305096_8194451.jpg",
-      "https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=85&w=1200&auto=format&fit=crop"
     ],
     "sizes": [
       "S",
@@ -2866,9 +2863,8 @@ export const PRODUCTS: Product[] = [
     "category": "tees",
     "collection": "midnight-archive",
     "images": [
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1684307524_2210452.jpg",
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1684307524_5829670.jpg",
-      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=85&w=1200&auto=format&fit=crop"
     ],
     "sizes": [
       "S",
@@ -2913,9 +2909,8 @@ export const PRODUCTS: Product[] = [
     "category": "tees",
     "collection": "after-hours-essentials",
     "images": [
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1695208447_6782390.jpg",
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1695208447_1893321.jpg",
-      "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=85&w=1200&auto=format&fit=crop"
     ],
     "sizes": [
       "S",
@@ -2960,9 +2955,8 @@ export const PRODUCTS: Product[] = [
     "category": "outerwear",
     "collection": "night-shift",
     "images": [
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1697014493_7839210.jpg",
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1697014493_1294820.jpg",
-      "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=85&w=1200&auto=format&fit=crop"
     ],
     "sizes": [
       "S",
@@ -3009,9 +3003,8 @@ export const PRODUCTS: Product[] = [
     "category": "tees",
     "collection": "new-after-dark",
     "images": [
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1689248492_8918230.jpg",
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1689248492_3491820.jpg",
-      "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=85&w=1200&auto=format&fit=crop"
     ],
     "sizes": [
       "S",
@@ -3057,9 +3050,8 @@ export const PRODUCTS: Product[] = [
     "category": "hoodies",
     "collection": "night-shift",
     "images": [
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1696501928_8918230.jpg",
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1696501928_2391820.jpg",
-      "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=85&w=1200&auto=format&fit=crop"
     ],
     "sizes": [
       "S",
@@ -3106,9 +3098,8 @@ export const PRODUCTS: Product[] = [
     "category": "outerwear",
     "collection": "new-after-dark",
     "images": [
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1698492019_6719283.jpg",
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1698492019_1294829.jpg",
-      "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=85&w=1200&auto=format&fit=crop"
     ],
     "sizes": [
       "M",
@@ -3154,9 +3145,8 @@ export const PRODUCTS: Product[] = [
     "category": "outerwear",
     "collection": "midnight-archive",
     "images": [
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1699104921_7819203.jpg",
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1699104921_3491829.jpg",
-      "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=85&w=1200&auto=format&fit=crop"
     ],
     "sizes": [
       "S",
@@ -3201,9 +3191,8 @@ export const PRODUCTS: Product[] = [
     "category": "outerwear",
     "collection": "after-hours-essentials",
     "images": [
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1694201928_7819203.jpg",
-      "https://prod-img.thesouledstore.com/public/theSoul/uploads/catalog/product/1694201928_3491821.jpg",
-      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551028719-00167b16eac5?q=85&w=1200&auto=format&fit=crop"
     ],
     "sizes": [
       "S",

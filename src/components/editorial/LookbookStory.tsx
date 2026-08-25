@@ -11,8 +11,8 @@ export const LookbookStory: React.FC = () => {
           {/* Left Editorial Visual */}
           <div className="lg:col-span-7 relative aspect-[4/5] sm:aspect-[16/11] lg:aspect-[4/5] bg-zinc-900 overflow-hidden border border-white/10">
             <Image
-              src="https://images.unsplash.com/photo-1517445312882-bc9910d016b7?q=80&w=1400&auto=format&fit=crop"
-              alt="AFTER HOURS Editorial Story"
+              src="https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=85&w=1600&auto=format&fit=crop"
+              alt="AFTER HOURS Men's Nocturnal Streetwear Story"
               fill
               sizes="(max-width: 1024px) 100vw, 60vw"
               className="object-cover object-center grayscale hover:grayscale-0 transition-all duration-700"

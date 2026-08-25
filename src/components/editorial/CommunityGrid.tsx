@@ -10,8 +10,8 @@ const COMMUNITY_POSTS = [
     piece: "No Sleep Club Heavy Tee",
   },
   {
-    image: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?q=80&w=600&auto=format&fit=crop",
-    handle: "@ananya_dark",
+    image: "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=85&w=600&auto=format&fit=crop",
+    handle: "@aditya.raw",
     location: "HAUZ KHAS, DELHI • 03:15 AM",
     piece: "Midnight Utility Hoodie",
   },

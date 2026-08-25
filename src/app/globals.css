@@ -55,13 +55,25 @@ body {
   color: var(--foreground);
   overflow-x: hidden;
   min-height: 100vh;
-  /* Hide default cursor on desktop, show on mobile */
-  cursor: none;
 }
 
-@media (max-width: 768px) {
-  body {
-    cursor: auto;
+/* Force hide default OS cursor across all elements on desktop so ONLY the custom cursor shows */
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body,
+  *,
+  *::before,
+  *::after,
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  label,
+  [role="button"],
+  [type="button"],
+  [type="submit"] {
+    cursor: none !important;
   }
 }
 

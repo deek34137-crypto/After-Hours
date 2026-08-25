@@ -28,7 +28,10 @@ export const CustomCursor: React.FC = () => {
 
     const checkHover = (e: MouseEvent) => {
       const el = e.target as HTMLElement;
-      const isInteractive = el.closest("a, button, [data-cursor-hover]");
+      if (!el || !el.closest) return;
+      const isInteractive = el.closest(
+        "a, button, input, select, textarea, label, [role='button'], [tabindex], [data-cursor-hover], .group, select"
+      );
       setHovering(!!isInteractive);
     };
 

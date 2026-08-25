@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Sparkles, MessageSquare } from "lucide-react";
+import { VipDropModal } from "@/components/brand/VipDropModal";
 
 export const NewsletterSection: React.FC = () => {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [vipModalOpen, setVipModalOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,7 +16,7 @@ export const NewsletterSection: React.FC = () => {
   };
 
   return (
-    <section className="w-full py-20 bg-[#09090b] border-t border-white/10 px-4 sm:px-6 lg:px-8">
+    <section className="w-full py-20 bg-[#09090b] border-t border-white/10 px-4 sm:px-6 lg:px-8 select-none">
       <div className="max-w-xl mx-auto text-center space-y-6">
         <span className="font-mono text-xs text-zinc-500 uppercase tracking-widest block">
           PRIVATE ARCHIVE ACCESS
@@ -29,7 +31,7 @@ export const NewsletterSection: React.FC = () => {
         {submitted ? (
           <div className="p-4 bg-white/5 border border-emerald-500/30 flex items-center justify-center gap-3 text-emerald-400 font-mono text-xs uppercase tracking-wider">
             <Check className="w-4 h-4" />
-            <span>YOU ARE REGISTERED FOR DROP 04 NOTIFICATIONS</span>
+            <span>YOU ARE REGISTERED FOR DROP 05 NOTIFICATIONS</span>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
@@ -51,10 +53,24 @@ export const NewsletterSection: React.FC = () => {
           </form>
         )}
 
+        {/* WhatsApp / VIP Modal Trigger */}
+        <div className="pt-2">
+          <button
+            onClick={() => setVipModalOpen(true)}
+            className="inline-flex items-center gap-2 font-mono text-xs text-zinc-400 hover:text-white uppercase tracking-wider border-b border-zinc-700 hover:border-white pb-0.5 transition-colors"
+          >
+            <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
+            <span>PREFER WHATSAPP? UNLOCK VIP DROP 05 ALERTS</span>
+          </button>
+        </div>
+
         <span className="font-mono text-[10px] text-zinc-600 block">
           BY JOINING, YOU AGREE TO OUR PRIVACY POLICY. OPT OUT AT ANY TIME.
         </span>
       </div>
+
+      {/* VIP Modal */}
+      <VipDropModal isOpen={vipModalOpen} onClose={() => setVipModalOpen(false)} />
     </section>
   );
 };

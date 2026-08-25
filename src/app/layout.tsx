@@ -12,6 +12,7 @@ import { CartDrawer } from "@/components/cart/CartDrawer";
 import { SearchOverlayModal } from "@/components/search/SearchOverlayModal";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { PageLoader } from "@/components/ui/PageLoader";
+import { MidnightRadio } from "@/components/audio/MidnightRadio";
 
 export const metadata: Metadata = {
   title: "AFTER HOURS — Contemporary Streetwear",
@@ -46,6 +47,9 @@ export default function RootLayout({
 
         {/* Custom cursor — desktop only */}
         <CustomCursor />
+
+        {/* Floating Midnight Ambient Audio Player */}
+        <MidnightRadio />
 
         <CurrencyProvider>
           <ToastProvider>

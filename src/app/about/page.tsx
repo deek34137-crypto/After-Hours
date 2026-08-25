@@ -7,6 +7,8 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, ShieldCheck, Flame, Compass, Cpu, Layers, Disc3 } from "lucide-react";
 import { BrandClock } from "@/components/brand/BrandClock";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/ui/ScrollReveal";
+import { PRODUCTS } from "@/data/products";
+import { ShopTheLookHotspot } from "@/components/editorial/ShopTheLookHotspot";
 
 const SPECS = [
   {
@@ -110,7 +112,7 @@ export default function AboutPage() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 space-y-24">
         {/* Story Spread 1 */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
-          <div className="lg:col-span-6 relative aspect-[4/5] bg-zinc-900 overflow-hidden border border-white/10 group">
+          <div className="lg:col-span-6 relative aspect-[4/5] bg-zinc-900 overflow-hidden border border-white/10 group select-none">
             <Image
               src="https://cdn.shopify.com/s/files/1/0812/2948/0182/files/losingmymind_back.webp?v=1787567556"
               alt="AFTER HOURS Streetwear Construction"
@@ -119,9 +121,21 @@ export default function AboutPage() {
               className="object-cover object-top group-hover:scale-105 transition-transform duration-700 brightness-90 group-hover:brightness-100"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
-            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between font-mono text-[10px] text-zinc-300 uppercase tracking-widest">
+
+            {/* Hotspot */}
+            {PRODUCTS[0] && (
+              <ShopTheLookHotspot
+                product={PRODUCTS[0]}
+                top="45%"
+                left="50%"
+                label="FIG 01 // OVERSIZED GRAPHIC TEE"
+                align="center"
+              />
+            )}
+
+            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between font-mono text-[10px] text-zinc-300 uppercase tracking-widest pointer-events-none">
               <span>FIG 01. GRAPHIC DENSITY</span>
-              <span>240 GSM FRENCH TERRY</span>
+              <span>TAP PIN TO SHOP</span>
             </div>
           </div>
 
@@ -180,7 +194,7 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <div className="lg:col-span-6 order-1 lg:order-2 relative aspect-[4/5] bg-zinc-900 overflow-hidden border border-white/10 group">
+          <div className="lg:col-span-6 order-1 lg:order-2 relative aspect-[4/5] bg-zinc-900 overflow-hidden border border-white/10 group select-none">
             <Image
               src="https://cdn.shopify.com/s/files/1/0812/2948/0182/files/beyond_back.webp?v=1787513818"
               alt="AFTER HOURS Denim Wash Boxy Fit"
@@ -189,9 +203,21 @@ export default function AboutPage() {
               className="object-cover object-top group-hover:scale-105 transition-transform duration-700 brightness-90 group-hover:brightness-100"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
-            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between font-mono text-[10px] text-zinc-300 uppercase tracking-widest">
+
+            {/* Hotspot */}
+            {PRODUCTS[1] && (
+              <ShopTheLookHotspot
+                product={PRODUCTS[1]}
+                top="40%"
+                left="50%"
+                label="FIG 02 // MINERAL WASH TEE"
+                align="center"
+              />
+            )}
+
+            <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between font-mono text-[10px] text-zinc-300 uppercase tracking-widest pointer-events-none">
               <span>FIG 02. MINERAL WASH</span>
-              <span>BOX-CUT GEOMETRY</span>
+              <span>TAP PIN TO SHOP</span>
             </div>
           </div>
         </div>

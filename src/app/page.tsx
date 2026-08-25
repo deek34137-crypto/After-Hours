@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { FullScreenHero } from "@/components/hero/FullScreenHero";
 import { MarqueeTicker } from "@/components/brand/MarqueeTicker";

@@ -9,11 +9,13 @@ import { Header } from "@/components/navigation/Header";
 import { Footer } from "@/components/footer/Footer";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { SearchOverlayModal } from "@/components/search/SearchOverlayModal";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { PageLoader } from "@/components/ui/PageLoader";
 
 export const metadata: Metadata = {
   title: "AFTER HOURS — Contemporary Streetwear",
-  description: "For the hours that matter. Premium oversized tees, 420 GSM heavyweight hoodies, and tactical utility pieces engineered for nocturnal life.",
-  keywords: ["streetwear", "heavyweight cotton", "oversized tee", "420 GSM hoodie", "after hours", "mumbai streetwear", "india fashion"],
+  description: "For the hours that matter. Premium oversized tees, heavyweight cotton, and urban streetwear engineered for nocturnal life.",
+  keywords: ["streetwear", "heavyweight cotton", "oversized tee", "after hours", "mumbai streetwear", "india fashion", "graphic tees"],
   openGraph: {
     title: "AFTER HOURS — Contemporary Streetwear",
     description: "For the hours that matter. Independent contemporary streetwear engineered in India.",
@@ -34,8 +36,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-[#080808] text-[#f5f5f0] min-h-screen flex flex-col font-sans selection:bg-white selection:text-black">
+      <body className="bg-[#080808] text-[#f5f5f0] min-h-screen flex flex-col font-sans">
+        {/* Grain texture overlay */}
         <div className="grain-overlay" />
+
+        {/* Brand page loader — first visit only */}
+        <PageLoader />
+
+        {/* Custom cursor — desktop only */}
+        <CustomCursor />
+
         <ToastProvider>
           <CartProvider>
             <WishlistProvider>

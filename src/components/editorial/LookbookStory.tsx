@@ -11,11 +11,11 @@ export const LookbookStory: React.FC = () => {
           {/* Left Editorial Visual */}
           <div className="lg:col-span-7 relative aspect-[4/5] sm:aspect-[16/11] lg:aspect-[4/5] bg-zinc-900 overflow-hidden border border-white/10">
             <Image
-              src="https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=85&w=1600&auto=format&fit=crop"
-              alt="AFTER HOURS Men's Nocturnal Streetwear Story"
+              src="https://cdn.shopify.com/s/files/1/0812/2948/0182/files/cerebal_sin_front.webp?v=1787442570"
+              alt="AFTER HOURS Red Studio Nocturnal Story"
               fill
               sizes="(max-width: 1024px) 100vw, 60vw"
-              className="object-cover object-center grayscale hover:grayscale-0 transition-all duration-700"
+              className="object-cover object-top"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
             <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between text-white font-mono text-[11px] tracking-widest uppercase">

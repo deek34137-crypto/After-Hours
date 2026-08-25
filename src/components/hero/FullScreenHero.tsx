@@ -12,16 +12,16 @@ export const FullScreenHero: React.FC = () => {
       {/* Background Hero Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=85&w=2000&auto=format&fit=crop"
-          alt="AFTER HOURS Nocturnal Campaign"
+          src="https://cdn.shopify.com/s/files/1/0812/2948/0182/files/thorn_back_00cd96c8-24f7-41ae-895d-42eb018f4c4c.webp?v=1787495872"
+          alt="AFTER HOURS Red Studio Nocturnal Campaign"
           fill
           priority
-          className="object-cover object-center brightness-[0.65] contrast-[1.1] scale-100"
+          className="object-cover object-top brightness-[0.7] contrast-[1.1] scale-100"
           sizes="100vw"
         />
         {/* Gradients */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-transparent to-black/70" />
       </div>
 
       {/* Top Floating Badge */}

@@ -80,7 +80,7 @@ export const MidnightRadio: React.FC = () => {
                   Self Aware
                 </div>
                 <div className="font-mono text-[10px] text-zinc-400">
-                  Kensuke Ushio (Nocturnal Edit)
+                  Temper City
                 </div>
               </div>
 

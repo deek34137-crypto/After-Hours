@@ -13,7 +13,7 @@ interface CheckoutModalProps {
 }
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose }) => {
-  const { cart, subtotal, clearCart } = useCart();
+  const { cart, subtotal, clearCart, closeCart } = useCart();
   const { formatPrice, currency, currencyDetails } = useCurrency();
   const router = useRouter();
 
@@ -59,13 +59,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
     setLoading(true);
 
     if (paymentMethod === "cod") {
-      // Cash on delivery simulation
+      // Cash on delivery — clear cart, close all drawers, then navigate
       setTimeout(() => {
         setLoading(false);
         clearCart();
-        onClose();
+        closeCart(); // Close the cart drawer
+        onClose();   // Close the checkout modal
         router.push(`/order-success?txnid=COD_${Date.now()}&amount=${finalTotal}&mode=COD&status=success`);
-      }, 1000);
+      }, 800);
       return;
     }
 
@@ -93,6 +94,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
       }
 
       setPayuData(data);
+
+      // Close cart drawer before redirecting to PayU gateway
+      closeCart();
 
       // Auto-submit to PayU endpoint
       setTimeout(() => {

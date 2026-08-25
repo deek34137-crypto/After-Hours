@@ -50,6 +50,15 @@ export const CustomCursor: React.FC = () => {
     };
   }, [visible]);
 
+  // Don't render on touch/mobile devices at all
+  const [isTouchDevice, setIsTouchDevice] = useState(true);
+
+  useEffect(() => {
+    setIsTouchDevice(window.matchMedia("(hover: none)").matches);
+  }, []);
+
+  if (isTouchDevice) return null;
+
   return (
     <>
       {/* Outer ring */}

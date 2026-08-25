@@ -44,9 +44,9 @@ export const Header: React.FC = () => {
             : "bg-black/60 backdrop-blur-sm border-b border-white/5 py-4 sm:py-5"
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
           {/* Left: Mobile Menu Trigger + Desktop Nav */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 flex-shrink-0">
             <button
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Open Navigation Menu"
@@ -80,32 +80,32 @@ export const Header: React.FC = () => {
             </nav>
           </div>
 
-          {/* Center: Brand Logo */}
-          <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center text-center">
+          {/* Center: Brand Logo — flex-1 keeps it from overlapping side items */}
+          <div className="flex-1 flex items-center justify-center min-w-0">
             <Logo />
           </div>
 
           {/* Right: Actions (Search, Wishlist, Bag) */}
-          <div className="flex items-center gap-3 sm:gap-5">
+          <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
             {/* Search Trigger */}
             <button
               onClick={openSearch}
               aria-label="Search Catalog"
               className="group flex items-center gap-2 p-1.5 text-zinc-300 hover:text-white transition-colors"
             >
-              <Search className="w-4 h-4 sm:w-4 sm:h-4" />
+              <Search className="w-4 h-4" />
               <span className="hidden xl:inline-block font-mono text-[10px] text-zinc-500 tracking-wider group-hover:text-zinc-300">
                 [ ⌘K ]
               </span>
             </button>
 
-            {/* Wishlist Link */}
+            {/* Wishlist Link — hidden on xs to save space */}
             <Link
               href="/wishlist"
               aria-label="Saved Wishlist"
-              className="relative p-1.5 text-zinc-300 hover:text-white transition-colors"
+              className="relative p-1.5 text-zinc-300 hover:text-white transition-colors hidden sm:block"
             >
-              <Heart className="w-4 h-4 sm:w-4 sm:h-4" />
+              <Heart className="w-4 h-4" />
               {wishlistCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-white text-black text-[9px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center font-mono">
                   {wishlistCount}
@@ -117,12 +117,12 @@ export const Header: React.FC = () => {
             <button
               onClick={openCart}
               aria-label="Open Shopping Bag"
-              className="relative flex items-center gap-2 px-2.5 py-1.5 text-white hover:opacity-90 transition-opacity bg-white/10 hover:bg-white/15 border border-white/15"
+              className="relative flex items-center gap-1.5 px-2 py-1.5 text-white hover:opacity-90 transition-opacity bg-white/10 hover:bg-white/15 border border-white/15"
             >
               <ShoppingBag className="w-3.5 h-3.5" />
-              <span className="font-mono text-[10px] tracking-widest uppercase hidden xs:inline-block">BAG</span>
+              <span className="font-mono text-[10px] tracking-widest uppercase hidden sm:inline-block">BAG</span>
               {cartCount > 0 && (
-                <span className="font-mono text-[10px] font-bold bg-white text-black px-1.5 py-0.2 rounded-xs">
+                <span className="font-mono text-[10px] font-bold bg-white text-black px-1 rounded-sm">
                   {cartCount}
                 </span>
               )}

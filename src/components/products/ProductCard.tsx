@@ -6,7 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Plus, ShoppingBag } from "lucide-react";
 import { Product } from "@/lib/types";
-import { formatPrice } from "@/lib/utils";
+import { useCurrency } from "@/context/CurrencyContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
 import { useToast } from "@/context/ToastContext";
@@ -24,6 +24,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
   const { isInWishlist, toggleWishlist } = useWishlist();
   const { addToCart } = useCart();
   const { showToast } = useToast();
+  const { formatPrice } = useCurrency();
 
   const isSaved = isInWishlist(product.id);
   const primaryImg = product.images[0] || "/placeholder.jpg";

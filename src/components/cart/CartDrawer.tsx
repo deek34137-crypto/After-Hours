@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { X, Plus, Minus, Trash2, ArrowRight, ShieldCheck, Truck } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import { formatPrice } from "@/lib/utils";
+import { useCurrency } from "@/context/CurrencyContext";
 
 export const CartDrawer: React.FC = () => {
   const {
@@ -16,12 +16,19 @@ export const CartDrawer: React.FC = () => {
     updateQuantity,
     subtotal,
     cartCount,
-    freeShippingThreshold,
-    shippingRemaining,
   } = useCart();
+  const { formatPrice, currencyDetails, freeShippingThreshold } = useCurrency();
 
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [checkoutSuccess, setCheckoutSuccess] = useState(false);
+
+  const handleMockCheckout = () => {
+    setIsCheckingOut(true);
+    setTimeout(() => {
+      setIsCheckingOut(false);
+      setCheckoutSuccess(true);
+    }, 1500);
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -38,15 +45,13 @@ export const CartDrawer: React.FC = () => {
 
   if (!isOpen) return null;
 
-  const handleMockCheckout = () => {
-    setIsCheckingOut(true);
-    setTimeout(() => {
-      setIsCheckingOut(false);
-      setCheckoutSuccess(true);
-    }, 1500);
-  };
-
-  const progressPercent = Math.min(100, Math.round((subtotal / freeShippingThreshold) * 100));
+  // Shipping calculation in local currency
+  const shippingThreshold = freeShippingThreshold;
+  // Subtotal converted to INR basis comparison
+  const subtotalINR = subtotal;
+  const shippingRemainingINR = Math.max(0, 1999 - subtotalINR);
+  const isFreeShipping = subtotalINR >= 1999;
+  const progressPercent = Math.min(100, Math.round((subtotalINR / 1999) * 100));
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
@@ -83,10 +88,10 @@ export const CartDrawer: React.FC = () => {
             <div className="flex items-center justify-between text-xs font-mono mb-1.5">
               <span className="flex items-center gap-1.5 text-zinc-300">
                 <Truck className="w-3.5 h-3.5" />
-                {shippingRemaining === 0 ? (
-                  <span className="text-emerald-400 font-semibold">FREE PAN-INDIA SHIPPING UNLOCKED</span>
+                {isFreeShipping ? (
+                  <span className="text-emerald-400 font-semibold uppercase">COMPLIMENTARY SHIPPING UNLOCKED</span>
                 ) : (
-                  <span>ADD {formatPrice(shippingRemaining)} FOR FREE SHIPPING</span>
+                  <span>ADD {formatPrice(shippingRemainingINR)} FOR FREE SHIPPING</span>
                 )}
               </span>
               <span className="text-zinc-500">{progressPercent}%</span>
@@ -226,8 +231,8 @@ export const CartDrawer: React.FC = () => {
                   </span>
                 </div>
                 <div className="flex justify-between text-zinc-400 text-[11px]">
-                  <span>ESTIMATED PAN-INDIA SHIPPING</span>
-                  <span>{shippingRemaining === 0 ? "FREE" : "₹100 (FREE ABOVE ₹1,999)"}</span>
+                  <span>ESTIMATED SHIPPING</span>
+                  <span>{isFreeShipping ? "FREE" : "CALCULATED AT NEXT STEP"}</span>
                 </div>
                 <div className="text-[10px] text-zinc-500 pt-1">
                   Tax included. Duties & local taxes calculated at checkout.

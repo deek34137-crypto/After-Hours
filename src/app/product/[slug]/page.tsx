@@ -16,7 +16,8 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { PRODUCTS } from "@/data/products";
-import { formatPrice, calculateDiscount } from "@/lib/utils";
+import { calculateDiscount } from "@/lib/utils";
+import { useCurrency } from "@/context/CurrencyContext";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useToast } from "@/context/ToastContext";
@@ -45,6 +46,7 @@ export default function ProductDetailPage({ params }: Props) {
   const { addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
   const { showToast } = useToast();
+  const { formatPrice, currencyDetails } = useCurrency();
 
   const isSaved = isInWishlist(product.id);
   const discount = calculateDiscount(product.price, product.compareAtPrice);
@@ -166,7 +168,7 @@ export default function ProductDetailPage({ params }: Props) {
               )}
             </div>
             <p className="font-mono text-[10px] text-zinc-500 pt-1">
-              Inclusive of all taxes. Free shipping on orders over ₹1,999.
+              Inclusive of all duties & taxes. {currencyDetails.shippingLabel}.
             </p>
           </div>
 

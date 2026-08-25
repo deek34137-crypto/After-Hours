@@ -4,6 +4,7 @@ import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import { SearchProvider } from "@/context/SearchContext";
 import { ToastProvider } from "@/context/ToastContext";
+import { CurrencyProvider } from "@/context/CurrencyContext";
 import { AnnouncementBar } from "@/components/navigation/AnnouncementBar";
 import { Header } from "@/components/navigation/Header";
 import { Footer } from "@/components/footer/Footer";
@@ -46,20 +47,22 @@ export default function RootLayout({
         {/* Custom cursor — desktop only */}
         <CustomCursor />
 
-        <ToastProvider>
-          <CartProvider>
-            <WishlistProvider>
-              <SearchProvider>
-                <AnnouncementBar />
-                <Header />
-                <main className="flex-1 w-full">{children}</main>
-                <Footer />
-                <CartDrawer />
-                <SearchOverlayModal />
-              </SearchProvider>
-            </WishlistProvider>
-          </CartProvider>
-        </ToastProvider>
+        <CurrencyProvider>
+          <ToastProvider>
+            <CartProvider>
+              <WishlistProvider>
+                <SearchProvider>
+                  <AnnouncementBar />
+                  <Header />
+                  <main className="flex-1 w-full">{children}</main>
+                  <Footer />
+                  <CartDrawer />
+                  <SearchOverlayModal />
+                </SearchProvider>
+              </WishlistProvider>
+            </CartProvider>
+          </ToastProvider>
+        </CurrencyProvider>
       </body>
     </html>
   );

@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Trash2, Plus, Minus, ArrowRight, ShieldCheck, Truck } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import { formatPrice } from "@/lib/utils";
+import { useCurrency } from "@/context/CurrencyContext";
 
 export default function CartPage() {
   const {
@@ -14,9 +14,8 @@ export default function CartPage() {
     updateQuantity,
     subtotal,
     cartCount,
-    freeShippingThreshold,
-    shippingRemaining,
   } = useCart();
+  const { formatPrice, currencyDetails, freeShippingThreshold } = useCurrency();
 
   const [promoCode, setPromoCode] = useState("");
   const [promoApplied, setPromoApplied] = useState(false);
@@ -25,6 +24,7 @@ export default function CartPage() {
 
   const discountAmount = promoApplied ? Math.round(subtotal * 0.1) : 0;
   const finalTotal = Math.max(0, subtotal - discountAmount);
+  const shippingRemaining = Math.max(0, 1999 - subtotal);
 
   const handleApplyPromo = (e: React.FormEvent) => {
     e.preventDefault();
@@ -180,10 +180,10 @@ export default function CartPage() {
             {/* Shipping Progress */}
             <div className="bg-white/5 p-3 font-mono text-xs text-zinc-300 flex items-center gap-2">
               <Truck className="w-4 h-4 text-zinc-400" />
-              {shippingRemaining === 0 ? (
-                <span className="text-emerald-400 font-bold">FREE PAN-INDIA DELIVERY UNLOCKED</span>
+              {subtotal >= 1999 ? (
+                <span className="text-emerald-400 font-bold uppercase">COMPLIMENTARY SHIPPING UNLOCKED</span>
               ) : (
-                <span>Add {formatPrice(shippingRemaining)} for Free Delivery</span>
+                <span>Add {formatPrice(Math.max(0, 1999 - subtotal))} for Free Shipping</span>
               )}
             </div>
 

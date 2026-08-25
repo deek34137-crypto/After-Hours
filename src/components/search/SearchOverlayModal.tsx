@@ -5,9 +5,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Search, X, ArrowUpRight } from "lucide-react";
 import { useSearch } from "@/context/SearchContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import { PRODUCTS } from "@/data/products";
 import { Product } from "@/lib/types";
-import { formatPrice } from "@/lib/utils";
 
 const TRENDING_SEARCHES = [
   "Core Tee",
@@ -20,6 +20,7 @@ const TRENDING_SEARCHES = [
 
 export const SearchOverlayModal: React.FC = () => {
   const { isSearchOpen, closeSearch } = useSearch();
+  const { formatPrice } = useCurrency();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<Product[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);

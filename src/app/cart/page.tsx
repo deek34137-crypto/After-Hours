@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Trash2, Plus, Minus, ArrowRight, ShieldCheck, Truck } from "lucide-react";
+import { Trash2, Plus, Minus, ArrowRight, ShieldCheck, Truck, Lock } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useCurrency } from "@/context/CurrencyContext";
+import { CheckoutModal } from "@/components/checkout/CheckoutModal";
 
 export default function CartPage() {
   const {
@@ -19,12 +20,12 @@ export default function CartPage() {
 
   const [promoCode, setPromoCode] = useState("");
   const [promoApplied, setPromoApplied] = useState(false);
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
-  const [checkoutDone, setCheckoutDone] = useState(false);
+  const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
 
   const discountAmount = promoApplied ? Math.round(subtotal * 0.1) : 0;
   const finalTotal = Math.max(0, subtotal - discountAmount);
   const shippingRemaining = Math.max(0, 1999 - subtotal);
+  const isFreeShipping = subtotal >= 1999;
 
   const handleApplyPromo = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,22 +34,14 @@ export default function CartPage() {
     }
   };
 
-  const handleCheckout = () => {
-    setIsCheckingOut(true);
-    setTimeout(() => {
-      setIsCheckingOut(false);
-      setCheckoutDone(true);
-    }, 1500);
-  };
-
   if (cart.length === 0) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-24 text-center space-y-6">
+      <div className="max-w-4xl mx-auto px-4 py-24 text-center space-y-6 select-none">
         <h1 className="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tight text-white">
           YOUR BAG IS EMPTY
         </h1>
         <p className="text-zinc-400 font-sans text-sm max-w-sm mx-auto">
-          You haven't added any pieces to your bag yet. Browse our latest drops and heavyweight essentials.
+          You haven&apos;t added any pieces to your bag yet. Browse our latest drops and heavyweight essentials.
         </p>
         <Link
           href="/shop"
@@ -60,30 +53,8 @@ export default function CartPage() {
     );
   }
 
-  if (checkoutDone) {
-    return (
-      <div className="max-w-xl mx-auto px-4 py-24 text-center space-y-6">
-        <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mx-auto">
-          <ShieldCheck className="w-8 h-8" />
-        </div>
-        <h1 className="font-sans font-black text-3xl uppercase tracking-tight text-white">
-          CHECKOUT SIMULATION COMPLETE
-        </h1>
-        <p className="text-zinc-400 font-sans text-sm">
-          In production, this initiates the official Razorpay / Cashfree UPI & Card checkout interface.
-        </p>
-        <Link
-          href="/shop"
-          className="inline-block px-8 py-3.5 bg-white text-black font-mono font-bold text-xs uppercase tracking-widest"
-        >
-          CONTINUE BROWSING
-        </Link>
-      </div>
-    );
-  }
-
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 select-none">
       <div className="border-b border-white/10 pb-6 mb-8 flex items-baseline justify-between">
         <h1 className="font-sans font-black text-3xl sm:text-4xl uppercase tracking-tight text-white">
           SHOPPING BAG
@@ -93,51 +64,52 @@ export default function CartPage() {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        {/* Left Column: Items */}
-        <div className="lg:col-span-8 space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        {/* Left Column: Cart Items List */}
+        <div className="lg:col-span-8 space-y-4">
           {cart.map((item) => (
             <div
               key={item.id}
-              className="flex gap-6 pb-6 border-b border-white/10 last:border-0"
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 p-4 sm:p-6 bg-[#0e0e12] border border-white/10 items-start sm:items-center justify-between"
             >
-              {/* Product Image */}
-              <div className="relative w-24 sm:w-32 aspect-[3/4] bg-zinc-900 overflow-hidden border border-white/10 flex-shrink-0">
-                <Image
-                  src={item.product.images[0]}
-                  alt={item.product.name}
-                  fill
-                  className="object-cover"
-                  sizes="128px"
-                />
-              </div>
-
-              {/* Product Info */}
-              <div className="flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <Link
-                        href={`/product/${item.product.slug}`}
-                        className="font-sans font-bold text-base sm:text-lg uppercase tracking-tight hover:text-zinc-300"
-                      >
-                        {item.product.name}
-                      </Link>
-                      <div className="flex items-center gap-3 font-mono text-xs text-zinc-400 mt-1">
-                        <span>SIZE: {item.size}</span>
-                        <span>•</span>
-                        <span>{item.color}</span>
-                      </div>
-                    </div>
-                    <span className="font-mono font-bold text-base text-white">
-                      {formatPrice(item.price * item.quantity)}
-                    </span>
-                  </div>
+              {/* Product Thumbnail */}
+              <div className="flex gap-4 items-center">
+                <div className="relative w-20 sm:w-24 aspect-[3/4] bg-zinc-900 overflow-hidden flex-shrink-0 border border-white/10">
+                  <Image
+                    src={item.product.images[0]}
+                    alt={item.product.name}
+                    fill
+                    className="object-cover"
+                    sizes="96px"
+                  />
                 </div>
 
-                <div className="flex items-center justify-between mt-6">
-                  {/* Quantity */}
-                  <div className="flex items-center border border-white/20">
+                <div className="space-y-1">
+                  <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider block">
+                    {item.product.category} • {item.product.gsm || "HEAVYWEIGHT"}
+                  </span>
+                  <Link
+                    href={`/product/${item.product.slug}`}
+                    className="font-sans font-bold text-sm sm:text-base uppercase hover:text-zinc-300 transition-colors block"
+                  >
+                    {item.product.name}
+                  </Link>
+                  <div className="flex items-center gap-3 font-mono text-xs text-zinc-400 pt-1">
+                    <span>SIZE: <strong className="text-white">{item.size}</strong></span>
+                    <span>•</span>
+                    <span>COLOR: <strong className="text-white">{item.color}</strong></span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Price & Quantity Controls */}
+              <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-4 pt-2 sm:pt-0 border-t sm:border-t-0 border-white/10">
+                <span className="font-mono font-bold text-base text-white">
+                  {formatPrice(item.price * item.quantity)}
+                </span>
+
+                <div className="flex items-center gap-3">
+                  <div className="flex items-center border border-white/20 bg-black">
                     <button
                       onClick={() => updateQuantity(item.id, -1)}
                       className="p-2 text-zinc-400 hover:text-white"
@@ -180,10 +152,10 @@ export default function CartPage() {
             {/* Shipping Progress */}
             <div className="bg-white/5 p-3 font-mono text-xs text-zinc-300 flex items-center gap-2">
               <Truck className="w-4 h-4 text-zinc-400" />
-              {subtotal >= 1999 ? (
+              {isFreeShipping ? (
                 <span className="text-emerald-400 font-bold uppercase">COMPLIMENTARY SHIPPING UNLOCKED</span>
               ) : (
-                <span>Add {formatPrice(Math.max(0, 1999 - subtotal))} for Free Shipping</span>
+                <span>Add {formatPrice(shippingRemaining)} for Free Shipping</span>
               )}
             </div>
 
@@ -223,37 +195,36 @@ export default function CartPage() {
               )}
               <div className="flex justify-between text-zinc-400">
                 <span>PAN-INDIA SHIPPING</span>
-                <span>{shippingRemaining === 0 ? "FREE" : "₹100"}</span>
+                <span>{isFreeShipping ? "FREE" : formatPrice(100)}</span>
               </div>
               <div className="flex justify-between text-base font-bold text-white border-t border-white/10 pt-3">
                 <span>TOTAL</span>
-                <span>{formatPrice(finalTotal + (shippingRemaining === 0 ? 0 : 100))}</span>
+                <span>{formatPrice(finalTotal + (isFreeShipping ? 0 : 100))}</span>
               </div>
             </div>
 
             {/* Checkout Button */}
             <button
-              onClick={handleCheckout}
-              disabled={isCheckingOut}
+              onClick={() => setCheckoutModalOpen(true)}
               className="w-full py-4 bg-white text-black font-mono font-bold text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2 shadow-2xl"
             >
-              {isCheckingOut ? (
-                <span className="animate-pulse">CONNECTING TO GATEWAY...</span>
-              ) : (
-                <>
-                  <span>PROCEED TO CHECKOUT</span>
-                  <ArrowRight className="w-4 h-4" />
-                </>
-              )}
+              <span>PROCEED TO CHECKOUT</span>
+              <ArrowRight className="w-4 h-4" />
             </button>
 
             <div className="text-center font-mono text-[10px] text-zinc-500 space-y-1">
-              <p>SECURE 256-BIT ENCRYPTION</p>
-              <p>UPI • CARDS • NETBANKING • COD AVAILABLE</p>
+              <p>PAYU 256-BIT SECURE ENCRYPTION</p>
+              <p>UPI • GOOGLE PAY • PHONEPE • CARDS • COD</p>
             </div>
           </div>
         </div>
       </div>
+
+      {/* PayU Checkout Modal */}
+      <CheckoutModal
+        isOpen={checkoutModalOpen}
+        onClose={() => setCheckoutModalOpen(false)}
+      />
     </div>
   );
 }

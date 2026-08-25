@@ -6,6 +6,7 @@ import Link from "next/link";
 import { X, Plus, Minus, Trash2, ArrowRight, ShieldCheck, Truck } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useCurrency } from "@/context/CurrencyContext";
+import { CheckoutModal } from "@/components/checkout/CheckoutModal";
 
 export const CartDrawer: React.FC = () => {
   const {
@@ -19,24 +20,14 @@ export const CartDrawer: React.FC = () => {
   } = useCart();
   const { formatPrice, currencyDetails, freeShippingThreshold } = useCurrency();
 
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
-  const [checkoutSuccess, setCheckoutSuccess] = useState(false);
-
-  const handleMockCheckout = () => {
-    setIsCheckingOut(true);
-    setTimeout(() => {
-      setIsCheckingOut(false);
-      setCheckoutSuccess(true);
-    }, 1500);
-  };
+  const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
-      setIsCheckingOut(false);
-      setCheckoutSuccess(false);
+      setCheckoutModalOpen(false);
     }
     return () => {
       document.body.style.overflow = "unset";
@@ -125,24 +116,6 @@ export const CartDrawer: React.FC = () => {
                   EXPLORE THE COLLECTION
                 </Link>
               </div>
-            ) : checkoutSuccess ? (
-              <div className="h-full flex flex-col items-center justify-center text-center py-16 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-                  <ShieldCheck className="w-8 h-8" />
-                </div>
-                <h3 className="font-sans font-bold text-lg uppercase tracking-wide text-white">
-                  ORDER INITIATED
-                </h3>
-                <p className="text-zinc-400 text-xs max-w-xs font-sans">
-                  Demo order registered! In production, this redirects directly to Razorpay / Cashfree / UPI Gateway.
-                </p>
-                <button
-                  onClick={() => setCheckoutSuccess(false)}
-                  className="px-6 py-2.5 border border-white/20 text-xs font-mono uppercase tracking-widest hover:bg-white/10"
-                >
-                  RETURN TO BAG
-                </button>
-              </div>
             ) : (
               cart.map((item) => (
                 <div
@@ -221,7 +194,7 @@ export const CartDrawer: React.FC = () => {
           </div>
 
           {/* Footer & Checkout */}
-          {cart.length > 0 && !checkoutSuccess && (
+          {cart.length > 0 && (
             <div className="p-6 border-t border-white/10 bg-[#0a0a0c] space-y-4">
               <div className="space-y-2 font-mono text-xs">
                 <div className="flex justify-between text-zinc-400">
@@ -241,18 +214,11 @@ export const CartDrawer: React.FC = () => {
 
               <div className="grid grid-cols-1 gap-2 pt-2">
                 <button
-                  onClick={handleMockCheckout}
-                  disabled={isCheckingOut}
-                  className="w-full py-4 bg-white text-black font-mono font-bold text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2"
+                  onClick={() => setCheckoutModalOpen(true)}
+                  className="w-full py-4 bg-white text-black font-mono font-bold text-xs uppercase tracking-widest hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2 shadow-2xl"
                 >
-                  {isCheckingOut ? (
-                    <span className="animate-pulse">CONNECTING TO GATEWAY...</span>
-                  ) : (
-                    <>
-                      <span>CHECKOUT • {formatPrice(subtotal)}</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </>
-                  )}
+                  <span>CHECKOUT • {formatPrice(subtotal)}</span>
+                  <ArrowRight className="w-4 h-4" />
                 </button>
 
                 <Link
@@ -277,6 +243,12 @@ export const CartDrawer: React.FC = () => {
           )}
         </div>
       </div>
+
+      {/* PayU Checkout Modal */}
+      <CheckoutModal
+        isOpen={checkoutModalOpen}
+        onClose={() => setCheckoutModalOpen(false)}
+      />
     </div>
   );
 };

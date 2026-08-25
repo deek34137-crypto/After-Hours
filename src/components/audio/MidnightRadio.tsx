@@ -76,8 +76,8 @@ export const MidnightRadio: React.FC = () => {
               </div>
 
               <div>
-                <div className="font-sans font-bold text-xs text-white uppercase tracking-tight line-clamp-1">
-                  In The Sea
+                <div className="font-sans font-black text-xs text-white uppercase tracking-tight line-clamp-1">
+                  Self Aware
                 </div>
                 <div className="font-mono text-[10px] text-zinc-400">
                   Kensuke Ushio (Nocturnal Edit)

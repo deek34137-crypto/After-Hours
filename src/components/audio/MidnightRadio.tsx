@@ -11,10 +11,22 @@ export const MidnightRadio: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Ambient lo-fi / nocturnal sound stream (fallback to high-fidelity ambient track)
-    const audio = new Audio("https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3");
+    // Primary: Exact local studio audio file (/audio/self-aware.mp3)
+    // Fallback: High-fidelity nocturnal ambient audio stream
+    const audio = new Audio("/audio/self-aware.mp3");
     audio.loop = true;
     audio.volume = volume;
+
+    audio.onerror = () => {
+      // If local file is not present yet, fallback to ambient stream
+      if (audio.src.includes("/audio/self-aware.mp3")) {
+        audio.src = "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3";
+        if (isPlaying) {
+          audio.play().catch(() => {});
+        }
+      }
+    };
+
     audioRef.current = audio;
 
     return () => {

@@ -129,7 +129,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
           <motion.button
             onClick={handleWishlist}
             aria-label={isSaved ? "Remove from wishlist" : "Add to wishlist"}
-            className="p-2 bg-black/60 backdrop-blur-sm border border-white/10 text-white hover:bg-white hover:text-black transition-colors pointer-events-auto"
+            className="p-2 bg-black/60 backdrop-blur-sm border border-white/10 text-white hover:border-white/40 hover:text-zinc-200 transition-all duration-200 pointer-events-auto"
             whileTap={{ scale: 0.85 }}
             animate={{ opacity: isHovered ? 1 : 0.7 }}
             transition={{ duration: 0.2 }}
@@ -173,12 +173,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
                     </div>
                     <div className="grid grid-cols-5 gap-1.5">
                       {product.sizes.map((s) => (
-                        <motion.button
+                        <button
                           key={s}
                           onClick={(e) => handleQuickAdd(e, s)}
-                          className="py-1.5 bg-white/10 hover:bg-white hover:text-black border border-white/15 text-xs font-mono font-bold transition-colors text-center uppercase relative overflow-hidden"
-                          whileTap={{ scale: 0.95 }}
-                          whileHover={{ backgroundColor: "rgba(255,255,255,1)", color: "#000" }}
+                          className="py-1.5 bg-white/10 hover:bg-white hover:text-black active:scale-95 border border-white/15 text-xs font-mono font-bold transition-all duration-200 ease-out text-center uppercase"
                         >
                           {addingSize === s ? (
                             <motion.span
@@ -189,7 +187,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
                               ✓
                             </motion.span>
                           ) : s}
-                        </motion.button>
+                        </button>
                       ))}
                     </div>
                   </motion.div>
@@ -201,8 +199,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, priority = fa
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.15 }}
                     onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShowQuickSizes(true); }}
-                    className="w-full py-2.5 bg-white text-black font-mono text-[10px] uppercase font-bold tracking-widest flex items-center justify-center gap-2 group/btn"
-                    whileHover={{ backgroundColor: "#f0f0f0" }}
+                    className="w-full py-2.5 bg-white text-black font-mono text-[10px] uppercase font-bold tracking-widest flex items-center justify-center gap-2 hover:bg-zinc-100 active:bg-zinc-200 transition-colors duration-200 ease-out"
                     whileTap={{ scale: 0.98 }}
                   >
                     <ShoppingBag className="w-3.5 h-3.5" />

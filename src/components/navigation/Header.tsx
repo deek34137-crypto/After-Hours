@@ -57,7 +57,10 @@ export const Header: React.FC = () => {
 
             <nav className="hidden lg:flex items-center gap-7">
               {NAV_LINKS.map((link) => {
-                const isActive = pathname === link.href;
+                const isActive =
+                  link.href === "/shop"
+                    ? pathname === "/shop"
+                    : pathname.startsWith(link.href);
                 return (
                   <Link
                     key={link.label}

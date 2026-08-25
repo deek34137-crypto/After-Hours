@@ -1,7 +1,7 @@
 export const NAV_LINKS = [
   { label: "SHOP", href: "/shop" },
-  { label: "COLLECTIONS", href: "/shop?filter=collections" },
-  { label: "NEW ARRIVALS", href: "/shop?sort=newest" },
+  { label: "COLLECTIONS", href: "/collections" },
+  { label: "NEW ARRIVALS", href: "/new-arrivals" },
   { label: "ABOUT", href: "/about" },
 ];
 

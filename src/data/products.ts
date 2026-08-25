@@ -21,7 +21,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 969,
     "compareAtPrice": 1308,
-    "category": "oversized",
+    "category": "outerwear",
     "collection": "new-after-dark",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/losingmymind_back.webp?v=1787567556",
@@ -68,7 +68,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1569,
     "compareAtPrice": 2118,
-    "category": "tees",
+    "category": "outerwear",
     "collection": "night-shift",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/beyond_back.webp?v=1787513818",
@@ -116,7 +116,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 969,
     "compareAtPrice": 1308,
-    "category": "oversized",
+    "category": "outerwear",
     "collection": "after-hours-essentials",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/obsession_front.webp?v=1787498044",
@@ -353,7 +353,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1269,
     "compareAtPrice": 1713,
-    "category": "oversized",
+    "category": "outerwear",
     "collection": "midnight-archive",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/DND_back.webp?v=1787410984",
@@ -543,7 +543,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1469,
     "compareAtPrice": 1983,
-    "category": "tees",
+    "category": "bottoms",
     "collection": "midnight-archive",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/lovestain_back.webp?v=1786978400",
@@ -960,7 +960,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1469,
     "compareAtPrice": 1983,
-    "category": "oversized",
+    "category": "outerwear",
     "collection": "new-after-dark",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/watchme_back.jpg?v=1786101841",
@@ -1534,7 +1534,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1169,
     "compareAtPrice": 1578,
-    "category": "outerwear",
+    "category": "tees",
     "collection": "new-after-dark",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/morning_back.webp?v=1786099503",
@@ -1675,7 +1675,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1569,
     "compareAtPrice": 2118,
-    "category": "hoodies",
+    "category": "bottoms",
     "collection": "midnight-archive",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/female_back_ffbe3fa2-77ad-402c-8641-9174bdb5348f.jpg?v=1784049471",
@@ -1725,7 +1725,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1569,
     "compareAtPrice": 2118,
-    "category": "tees",
+    "category": "bottoms",
     "collection": "new-after-dark",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/grey2_back.jpg?v=1784051898",
@@ -1820,7 +1820,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1469,
     "compareAtPrice": 1983,
-    "category": "hoodies",
+    "category": "bottoms",
     "collection": "after-hours-essentials",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/male_FRONT.jpg?v=1783604381",
@@ -1867,7 +1867,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1469,
     "compareAtPrice": 1983,
-    "category": "oversized",
+    "category": "bottoms",
     "collection": "midnight-archive",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/male_front_f318caa3-9396-43f4-9d37-e053a3fb9390.jpg?v=1783613107",
@@ -1913,7 +1913,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1569,
     "compareAtPrice": 2118,
-    "category": "tees",
+    "category": "outerwear",
     "collection": "new-after-dark",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/cigg_back.jpg?v=1786103127",
@@ -1962,7 +1962,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1169,
     "compareAtPrice": 1269,
-    "category": "outerwear",
+    "category": "tees",
     "collection": "night-shift",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/back_c4222cea-3990-4383-afa4-2d4ab35ac9b3.jpg?v=1783532832",
@@ -2009,7 +2009,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1369,
     "compareAtPrice": 1469,
-    "category": "tees",
+    "category": "outerwear",
     "collection": "after-hours-essentials",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/abyss_back.jpg?v=1786105731",
@@ -2150,7 +2150,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1269,
     "compareAtPrice": 1713,
-    "category": "tees",
+    "category": "outerwear",
     "collection": "night-shift",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/dirty_back.jpg?v=1786103458",
@@ -2197,7 +2197,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1269,
     "compareAtPrice": 1713,
-    "category": "tees",
+    "category": "outerwear",
     "collection": "after-hours-essentials",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/webali_front.jpg?v=1786103565",
@@ -2244,7 +2244,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1169,
     "compareAtPrice": 1269,
-    "category": "outerwear",
+    "category": "tees",
     "collection": "midnight-archive",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/fragile_front.jpg?v=1786105287",
@@ -2339,7 +2339,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1369,
     "compareAtPrice": 1469,
-    "category": "tees",
+    "category": "outerwear",
     "collection": "night-shift",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/power_back.jpg?v=1786104296",
@@ -2386,7 +2386,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1369,
     "compareAtPrice": 1469,
-    "category": "tees",
+    "category": "outerwear",
     "collection": "after-hours-essentials",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/softruin_back.jpg?v=1786104541",
@@ -2530,7 +2530,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1369,
     "compareAtPrice": 1469,
-    "category": "tees",
+    "category": "outerwear",
     "collection": "night-shift",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/orbit_front.jpg?v=1786116578",
@@ -2578,7 +2578,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1369,
     "compareAtPrice": 1469,
-    "category": "tees",
+    "category": "outerwear",
     "collection": "after-hours-essentials",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/tokyo_back.jpg?v=1786116347",
@@ -2622,7 +2622,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1269,
     "compareAtPrice": 1713,
-    "category": "outerwear",
+    "category": "tees",
     "collection": "midnight-archive",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/rib_M_front.jpg?v=1786118267",
@@ -2669,7 +2669,7 @@ export const PRODUCTS: Product[] = [
     "fit": "Relaxed Boxy Fit (True to size for oversized look)",
     "price": 1269,
     "compareAtPrice": 1713,
-    "category": "outerwear",
+    "category": "tees",
     "collection": "new-after-dark",
     "images": [
       "https://cdn.shopify.com/s/files/1/0812/2948/0182/files/playlist_M_back.jpg?v=1786118620",

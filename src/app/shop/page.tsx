@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useMemo, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { useState, useMemo, useEffect, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { SlidersHorizontal, Grid3X3, Grid2X2, RotateCcw, X } from "lucide-react";
 import { PRODUCTS } from "@/data/products";
 import { ProductGrid } from "@/components/products/ProductGrid";
@@ -10,40 +10,53 @@ import { Product } from "@/lib/types";
 const CATEGORIES = [
   { id: "all", label: "ALL PIECES" },
   { id: "tees", label: "T-SHIRTS & OVERSIZED" },
-  { id: "outerwear", label: "SHIRTS & JACKETS" },
-  { id: "hoodies", label: "HOODIES & FLEECE" },
-  { id: "bottoms", label: "BOTTOMS" },
+  { id: "outerwear", label: "SHIRTS & FULL SLEEVES" },
+  { id: "bottoms", label: "BOTTOMS & JOGGERS" },
 ];
 
 const SIZES = ["S", "M", "L", "XL", "XXL"];
 
+const SORTS = [
+  { id: "featured", label: "FEATURED" },
+  { id: "newest", label: "NEWEST FIRST" },
+  { id: "price-low", label: "PRICE: LOW → HIGH" },
+  { id: "price-high", label: "PRICE: HIGH → LOW" },
+];
+
 function ShopContent() {
   const searchParams = useSearchParams();
-  const initialCategory = searchParams.get("category") || "all";
-  const initialSort = searchParams.get("sort") || "featured";
+  const router = useRouter();
 
-  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    searchParams.get("category") || "all"
+  );
   const [selectedSize, setSelectedSize] = useState<string>("");
-  const [selectedSort, setSelectedSort] = useState<string>(initialSort);
+  const [selectedSort, setSelectedSort] = useState<string>(
+    searchParams.get("sort") || "featured"
+  );
   const [columns, setColumns] = useState<2 | 4>(4);
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
-  // Filter and Sort Logic
+  // Sync URL params on mount and when params change
+  useEffect(() => {
+    const cat = searchParams.get("category") || "all";
+    const sort = searchParams.get("sort") || "featured";
+    setSelectedCategory(cat);
+    setSelectedSort(sort);
+  }, [searchParams]);
+
   const filteredProducts = useMemo(() => {
     let list = [...PRODUCTS];
 
-    // Category filter
     if (selectedCategory && selectedCategory !== "all") {
       const cats = selectedCategory.split(",");
       list = list.filter((p) => cats.includes(p.category));
     }
 
-    // Size filter
     if (selectedSize) {
       list = list.filter((p) => p.sizes.includes(selectedSize as any));
     }
 
-    // Sort
     if (selectedSort === "price-low") {
       list.sort((a, b) => a.price - b.price);
     } else if (selectedSort === "price-high") {
@@ -59,6 +72,16 @@ function ShopContent() {
     setSelectedCategory("all");
     setSelectedSize("");
     setSelectedSort("featured");
+    router.push("/shop");
+  };
+
+  const handleCategoryChange = (id: string) => {
+    setSelectedCategory(id);
+    if (id === "all") {
+      router.push("/shop");
+    } else {
+      router.push(`/shop?category=${id}`);
+    }
   };
 
   const hasActiveFilters = selectedCategory !== "all" || selectedSize !== "" || selectedSort !== "featured";
@@ -80,18 +103,18 @@ function ShopContent() {
         </p>
       </div>
 
-      {/* Control Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-white/5">
-        {/* Category Pills (Desktop) */}
-        <div className="hidden md:flex items-center gap-2 flex-wrap">
+      {/* Filters Row */}
+      <div className="flex flex-col gap-4 mb-8">
+        {/* Category Pills */}
+        <div className="flex flex-wrap gap-2">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition-colors border ${
+              onClick={() => handleCategoryChange(cat.id)}
+              className={`px-4 py-2 font-mono text-[10px] sm:text-xs tracking-widest uppercase border transition-all duration-200 ${
                 selectedCategory === cat.id
-                  ? "bg-white text-black border-white font-bold"
-                  : "bg-white/5 text-zinc-400 border-white/10 hover:border-white/30 hover:text-white"
+                  ? "bg-white text-black border-white"
+                  : "bg-transparent text-zinc-400 border-white/20 hover:border-white/50 hover:text-white"
               }`}
             >
               {cat.label}
@@ -99,181 +122,109 @@ function ShopContent() {
           ))}
         </div>
 
-        {/* Mobile Filter Button */}
-        <button
-          onClick={() => setMobileFilterOpen(true)}
-          className="md:hidden flex items-center gap-2 px-3.5 py-2 bg-white/5 border border-white/15 text-xs font-mono tracking-widest text-zinc-300"
-        >
-          <SlidersHorizontal className="w-3.5 h-3.5" />
-          <span>FILTER & SORT</span>
-          {hasActiveFilters && <span className="w-1.5 h-1.5 bg-white rounded-full" />}
-        </button>
-
-        {/* Right Controls: Sort & Grid View Toggle */}
-        <div className="flex items-center gap-4 ml-auto">
-          {/* Size Filter Dropdown */}
-          <div className="hidden sm:flex items-center gap-2 font-mono text-xs">
-            <span className="text-zinc-500">SIZE:</span>
-            <select
-              value={selectedSize}
-              onChange={(e) => setSelectedSize(e.target.value)}
-              className="bg-black border border-white/15 text-white px-2 py-1 focus:outline-none uppercase"
-            >
-              <option value="">ALL SIZES</option>
-              {SIZES.map((s) => (
-                <option key={s} value={s}>
-                  {s}
-                </option>
-              ))}
-            </select>
+        {/* Bottom Row: Size + Sort + Grid toggle */}
+        <div className="flex flex-wrap items-center gap-3 justify-between">
+          <div className="flex items-center gap-2">
+            {/* Size Filter */}
+            <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest">SIZE:</span>
+            {SIZES.map((s) => (
+              <button
+                key={s}
+                onClick={() => setSelectedSize(selectedSize === s ? "" : s)}
+                className={`w-8 h-8 font-mono text-[10px] border transition-all ${
+                  selectedSize === s
+                    ? "bg-white text-black border-white"
+                    : "text-zinc-400 border-white/20 hover:border-white/50 hover:text-white"
+                }`}
+              >
+                {s}
+              </button>
+            ))}
           </div>
 
-          {/* Sort Dropdown */}
-          <div className="flex items-center gap-2 font-mono text-xs">
-            <span className="text-zinc-500 hidden sm:inline">SORT:</span>
+          <div className="flex items-center gap-3">
+            {/* Sort */}
             <select
               value={selectedSort}
               onChange={(e) => setSelectedSort(e.target.value)}
-              className="bg-black border border-white/15 text-white px-2.5 py-1.5 focus:outline-none uppercase text-xs"
+              className="bg-transparent border border-white/20 text-zinc-400 font-mono text-[10px] uppercase tracking-widest px-3 py-2 focus:outline-none focus:border-white/50 hover:border-white/50 transition-colors cursor-pointer"
             >
-              <option value="featured">FEATURED</option>
-              <option value="newest">NEWEST DROPS</option>
-              <option value="price-low">PRICE: LOW → HIGH</option>
-              <option value="price-high">PRICE: HIGH → LOW</option>
+              {SORTS.map((s) => (
+                <option key={s.id} value={s.id} className="bg-black text-white">
+                  {s.label}
+                </option>
+              ))}
             </select>
-          </div>
 
-          {/* Grid Toggle (Desktop) */}
-          <div className="hidden lg:flex items-center border border-white/15">
-            <button
-              onClick={() => setColumns(2)}
-              aria-label="2 Columns View"
-              className={`p-1.5 ${columns === 2 ? "bg-white text-black" : "text-zinc-500 hover:text-white"}`}
-            >
-              <Grid2X2 className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => setColumns(4)}
-              aria-label="4 Columns View"
-              className={`p-1.5 ${columns === 4 ? "bg-white text-black" : "text-zinc-500 hover:text-white"}`}
-            >
-              <Grid3X3 className="w-4 h-4" />
-            </button>
+            {/* Grid Toggle */}
+            <div className="hidden sm:flex items-center gap-1 border border-white/20 p-1">
+              <button
+                onClick={() => setColumns(2)}
+                className={`p-1.5 transition-colors ${columns === 2 ? "text-white" : "text-zinc-500 hover:text-white"}`}
+              >
+                <Grid2X2 className="w-3.5 h-3.5" />
+              </button>
+              <button
+                onClick={() => setColumns(4)}
+                className={`p-1.5 transition-colors ${columns === 4 ? "text-white" : "text-zinc-500 hover:text-white"}`}
+              >
+                <Grid3X3 className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Active Filter Badges */}
+      {/* Active Filter Tags */}
       {hasActiveFilters && (
-        <div className="flex items-center gap-2 mb-6 flex-wrap font-mono text-[11px]">
-          <span className="text-zinc-500 uppercase">ACTIVE FILTERS:</span>
+        <div className="flex flex-wrap items-center gap-2 mb-6">
+          <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest">ACTIVE FILTERS:</span>
           {selectedCategory !== "all" && (
-            <span className="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 px-2.5 py-1 text-white uppercase">
-              {selectedCategory}
-              <button onClick={() => setSelectedCategory("all")}>
-                <X className="w-3 h-3" />
-              </button>
-            </span>
+            <button
+              onClick={() => handleCategoryChange("all")}
+              className="flex items-center gap-1.5 px-3 py-1 bg-white/10 border border-white/20 font-mono text-[10px] text-white uppercase tracking-widest hover:bg-white/20 transition-colors"
+            >
+              {CATEGORIES.find((c) => c.id === selectedCategory)?.label || selectedCategory}
+              <X className="w-3 h-3" />
+            </button>
           )}
           {selectedSize && (
-            <span className="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 px-2.5 py-1 text-white uppercase">
+            <button
+              onClick={() => setSelectedSize("")}
+              className="flex items-center gap-1.5 px-3 py-1 bg-white/10 border border-white/20 font-mono text-[10px] text-white uppercase tracking-widest hover:bg-white/20 transition-colors"
+            >
               SIZE {selectedSize}
-              <button onClick={() => setSelectedSize("")}>
-                <X className="w-3 h-3" />
-              </button>
-            </span>
+              <X className="w-3 h-3" />
+            </button>
+          )}
+          {selectedSort !== "featured" && (
+            <button
+              onClick={() => setSelectedSort("featured")}
+              className="flex items-center gap-1.5 px-3 py-1 bg-white/10 border border-white/20 font-mono text-[10px] text-white uppercase tracking-widest hover:bg-white/20 transition-colors"
+            >
+              {SORTS.find((s) => s.id === selectedSort)?.label}
+              <X className="w-3 h-3" />
+            </button>
           )}
           <button
             onClick={resetFilters}
-            className="text-zinc-400 hover:text-white underline ml-2 flex items-center gap-1"
+            className="flex items-center gap-1 font-mono text-[10px] text-zinc-400 uppercase tracking-widest hover:text-white transition-colors ml-1"
           >
             <RotateCcw className="w-3 h-3" />
-            <span>RESET ALL</span>
+            RESET ALL
           </button>
         </div>
       )}
 
       {/* Product Grid */}
-      <ProductGrid products={filteredProducts} columns={columns} />
-
-      {/* Mobile Filter Drawer */}
-      {mobileFilterOpen && (
-        <div className="fixed inset-0 z-50 md:hidden">
-          <div
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm"
-            onClick={() => setMobileFilterOpen(false)}
-          />
-          <div className="fixed inset-y-0 right-0 max-w-xs w-full bg-[#0c0c0e] border-l border-white/15 p-6 flex flex-col justify-between z-50">
-            <div className="space-y-6">
-              <div className="flex items-center justify-between pb-4 border-b border-white/10">
-                <h3 className="font-sans font-black text-base uppercase tracking-tight">
-                  FILTER PIECES
-                </h3>
-                <button onClick={() => setMobileFilterOpen(false)}>
-                  <X className="w-5 h-5 text-zinc-400" />
-                </button>
-              </div>
-
-              {/* Categories */}
-              <div className="space-y-3">
-                <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest block">
-                  CATEGORY
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  {CATEGORIES.map((cat) => (
-                    <button
-                      key={cat.id}
-                      onClick={() => setSelectedCategory(cat.id)}
-                      className={`px-3 py-1.5 font-mono text-xs uppercase border ${
-                        selectedCategory === cat.id
-                          ? "bg-white text-black border-white font-bold"
-                          : "bg-white/5 text-zinc-400 border-white/10"
-                      }`}
-                    >
-                      {cat.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Sizes */}
-              <div className="space-y-3 pt-4 border-t border-white/10">
-                <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest block">
-                  SIZE
-                </span>
-                <div className="grid grid-cols-5 gap-1.5">
-                  {SIZES.map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => setSelectedSize(selectedSize === s ? "" : s)}
-                      className={`py-2 font-mono text-xs uppercase text-center border ${
-                        selectedSize === s
-                          ? "bg-white text-black border-white font-bold"
-                          : "bg-white/5 text-zinc-400 border-white/10"
-                      }`}
-                    >
-                      {s}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-6 border-t border-white/10 space-y-2">
-              <button
-                onClick={() => setMobileFilterOpen(false)}
-                className="w-full py-3 bg-white text-black font-mono font-bold text-xs uppercase tracking-widest"
-              >
-                APPLY FILTERS ({filteredProducts.length})
-              </button>
-              <button
-                onClick={resetFilters}
-                className="w-full py-2.5 border border-white/20 text-zinc-400 font-mono text-xs uppercase tracking-widest"
-              >
-                RESET
-              </button>
-            </div>
-          </div>
+      {filteredProducts.length > 0 ? (
+        <ProductGrid products={filteredProducts} columns={columns} />
+      ) : (
+        <div className="text-center py-24 space-y-3">
+          <p className="font-mono text-xs text-zinc-500 uppercase tracking-widest">NO PIECES FOUND</p>
+          <button onClick={resetFilters} className="font-mono text-xs text-white underline underline-offset-4">
+            CLEAR FILTERS
+          </button>
         </div>
       )}
     </div>
@@ -282,7 +233,11 @@ function ShopContent() {
 
 export default function ShopPage() {
   return (
-    <Suspense fallback={<div className="p-16 text-center font-mono text-xs">LOADING ARCHIVE...</div>}>
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-[50vh]">
+        <div className="font-mono text-xs text-zinc-500 uppercase tracking-widest animate-pulse">LOADING ARCHIVE...</div>
+      </div>
+    }>
       <ShopContent />
     </Suspense>
   );
